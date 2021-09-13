@@ -1,0 +1,6 @@
+check50:
+  files:
+    - !exclude "*"
+    - !include "*.py"
+    - !require degrees.py
+
