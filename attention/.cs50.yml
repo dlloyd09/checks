@@ -1,0 +1,11 @@
+check50:
+  dependencies:
+      - pillow
+      - transformers
+      - tensorflow
+  files:
+    - !exclude "*"
+    - !include "*.py"
+    - !include "*.md"
+    - !require mask.py
+
