@@ -7,6 +7,12 @@ import tensorflow as tf
 
 from transformers.tokenization_utils_base import BatchEncoding
 
+# Mock Encoding class for students who access _encodings
+class Encoding:
+    def __init__(self, ids):
+        self.ids = ids
+        self.n_sequences = 1
+
 @check50.check()
 def exists():
     """mask.py exists"""
@@ -29,9 +35,12 @@ def get_mask_token_index_0():
     sys.path = [""] + sys.path
     mask = check50.py.import_("mask.py")
     mask_token_index = 103
-    inputs = BatchEncoding({"input_ids": tf.constant(
-        [[ 101, 2023, 2003, 1037,  103, 3231, 1012,  102]]
-    )})
+
+    input_ids = [ 101, 2023, 2003, 1037,  103, 3231, 1012,  102]
+    inputs = BatchEncoding(
+        {"input_ids": tf.constant([input_ids])},
+        encoding=[Encoding(input_ids)]
+    )
 
     # Test
     expected = 4
@@ -54,9 +63,11 @@ def get_mask_token_index_1():
     sys.path = [""] + sys.path
     mask = check50.py.import_("mask.py")
     mask_token_index = 103
-    inputs = BatchEncoding({"input_ids": tf.constant(
-        [[ 101,  103, 2003, 1037, 3231, 1012,  102]]
-    )})
+    input_ids = [ 101,  103, 2003, 1037, 3231, 1012,  102]
+    inputs = BatchEncoding(
+        {"input_ids": tf.constant([input_ids])},
+        encoding=[Encoding(input_ids)]
+    )
 
     # Test
     expected = 1
@@ -79,9 +90,11 @@ def get_mask_token_index_2():
     sys.path = [""] + sys.path
     mask = check50.py.import_("mask.py")
     mask_token_index = 103
-    inputs = BatchEncoding({"input_ids": tf.constant(
-        [[ 101, 2023, 2003, 1037, 3231, 1012,  102]]
-    )})
+    input_ids = [ 101, 2023, 2003, 1037, 3231, 1012,  102]
+    inputs = BatchEncoding(
+        {"input_ids": tf.constant([input_ids])},
+        encoding=[Encoding(input_ids)]
+    )
 
     # Test
     expected = None
@@ -99,9 +112,11 @@ def get_mask_token_index_3():
     sys.path = [""] + sys.path
     mask = check50.py.import_("mask.py")
     mask_token_index = 108
-    inputs = BatchEncoding({"input_ids": tf.constant(
-        [[ 101, 2023, 2003, 1037,  108, 3231, 1012,  102]]
-    )})
+    input_ids = [ 101, 2023, 2003, 1037,  108, 3231, 1012,  102]
+    inputs = BatchEncoding(
+        {"input_ids": tf.constant([input_ids])},
+        encoding=[Encoding(input_ids)]
+    )
 
     # Test
     expected = 4
@@ -118,7 +133,7 @@ def get_mask_token_index_3():
 
 @check50.check(imports)
 def get_color_for_attention_score_0():
-    """get_color_for_attention_score_0 handles score of 0"""
+    """get_color_for_attention_score handles score of 0"""
 
     # Setup
     sys.path = [""] + sys.path
@@ -134,7 +149,7 @@ def get_color_for_attention_score_0():
 
 @check50.check(imports)
 def get_color_for_attention_score_1():
-    """get_color_for_attention_score_0 handles score of 0.3"""
+    """get_color_for_attention_score handles score of 0.3"""
 
     # Setup
     sys.path = [""] + sys.path
@@ -150,7 +165,7 @@ def get_color_for_attention_score_1():
 
 @check50.check(imports)
 def get_color_for_attention_score_2():
-    """get_color_for_attention_score_0 handles score of 0.8"""
+    """get_color_for_attention_score handles score of 0.8"""
 
     # Setup
     sys.path = [""] + sys.path
@@ -166,7 +181,7 @@ def get_color_for_attention_score_2():
 
 @check50.check(imports)
 def get_color_for_attention_score_3():
-    """get_color_for_attention_score_0 handles score of 1"""
+    """get_color_for_attention_score handles score of 1"""
 
     # Setup
     sys.path = [""] + sys.path
