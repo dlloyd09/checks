@@ -141,7 +141,7 @@ def get_color_for_attention_score_0():
 
     # Test
     expected = (0, 0, 0)
-    actual = mask.get_color_for_attention_score(tf.constant(0))
+    actual = mask.get_color_for_attention_score(tf.constant(0.0))
 
     if expected != actual:
         raise check50.Mismatch(str(expected), str(actual))
@@ -189,7 +189,7 @@ def get_color_for_attention_score_3():
 
     # Test
     expected = (255, 255, 255)
-    actual = mask.get_color_for_attention_score(tf.constant(1))
+    actual = mask.get_color_for_attention_score(tf.constant(1.0))
 
     if expected != actual:
         raise check50.Mismatch(str(expected), str(actual))
