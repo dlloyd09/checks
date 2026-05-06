@@ -3,6 +3,7 @@ check50:
       - pillow
       - transformers
       - tensorflow
+      - torch
   files:
     - !exclude "*"
     - !include "*.py"
