@@ -3,8 +3,6 @@ import sys
 import check50
 import check50.py
 
-import tensorflow as tf
-
 from transformers.tokenization_utils_base import BatchEncoding
 
 # Mock Encoding class for students who access _encodings
@@ -38,7 +36,7 @@ def get_mask_token_index_0():
 
     input_ids = [ 101, 2023, 2003, 1037,  103, 3231, 1012,  102]
     inputs = BatchEncoding(
-        {"input_ids": tf.constant([input_ids])},
+        {"input_ids": [input_ids]},
         encoding=[Encoding(input_ids)]
     )
 
@@ -65,7 +63,7 @@ def get_mask_token_index_1():
     mask_token_index = 103
     input_ids = [ 101,  103, 2003, 1037, 3231, 1012,  102]
     inputs = BatchEncoding(
-        {"input_ids": tf.constant([input_ids])},
+        {"input_ids": [input_ids]},
         encoding=[Encoding(input_ids)]
     )
 
@@ -92,7 +90,7 @@ def get_mask_token_index_2():
     mask_token_index = 103
     input_ids = [ 101, 2023, 2003, 1037, 3231, 1012,  102]
     inputs = BatchEncoding(
-        {"input_ids": tf.constant([input_ids])},
+        {"input_ids": [input_ids]},
         encoding=[Encoding(input_ids)]
     )
 
@@ -114,7 +112,7 @@ def get_mask_token_index_3():
     mask_token_index = 108
     input_ids = [ 101, 2023, 2003, 1037,  108, 3231, 1012,  102]
     inputs = BatchEncoding(
-        {"input_ids": tf.constant([input_ids])},
+        {"input_ids": [input_ids]},
         encoding=[Encoding(input_ids)]
     )
 
@@ -141,7 +139,7 @@ def get_color_for_attention_score_0():
 
     # Test
     expected = (0, 0, 0)
-    actual = mask.get_color_for_attention_score(tf.constant(0.0))
+    actual = mask.get_color_for_attention_score(0.0)
 
     if expected != actual:
         raise check50.Mismatch(str(expected), str(actual))
@@ -157,7 +155,7 @@ def get_color_for_attention_score_1():
 
     # Test
     expected = [(77, 77, 77), (76, 76, 76)]
-    actual = mask.get_color_for_attention_score(tf.constant(0.3))
+    actual = mask.get_color_for_attention_score(0.3)
 
     if actual not in expected:
         raise check50.Mismatch(str(expected[0]), str(actual))
@@ -173,7 +171,7 @@ def get_color_for_attention_score_2():
 
     # Test
     expected = (204, 204, 204)
-    actual = mask.get_color_for_attention_score(tf.constant(0.8))
+    actual = mask.get_color_for_attention_score(0.8)
 
     if expected != actual:
         raise check50.Mismatch(str(expected), str(actual))
@@ -189,7 +187,7 @@ def get_color_for_attention_score_3():
 
     # Test
     expected = (255, 255, 255)
-    actual = mask.get_color_for_attention_score(tf.constant(1.0))
+    actual = mask.get_color_for_attention_score(1.0)
 
     if expected != actual:
         raise check50.Mismatch(str(expected), str(actual))
