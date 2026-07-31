@@ -2,14 +2,16 @@ import sys
 
 import check50
 import check50.py
-
+import torch
 from transformers.tokenization_utils_base import BatchEncoding
+
 
 # Mock Encoding class for students who access _encodings
 class Encoding:
     def __init__(self, ids):
         self.ids = ids
         self.n_sequences = 1
+
 
 @check50.check()
 def exists():
@@ -34,11 +36,8 @@ def get_mask_token_index_0():
     mask = check50.py.import_("mask.py")
     mask_token_index = 103
 
-    input_ids = [ 101, 2023, 2003, 1037,  103, 3231, 1012,  102]
-    inputs = BatchEncoding(
-        {"input_ids": [input_ids]},
-        encoding=[Encoding(input_ids)]
-    )
+    input_ids = torch.tensor([101, 2023, 2003, 1037, 103, 3231, 1012, 102])
+    inputs = BatchEncoding({"input_ids": [input_ids]}, encoding=[Encoding(input_ids)])
 
     # Test
     expected = 4
@@ -61,11 +60,8 @@ def get_mask_token_index_1():
     sys.path = [""] + sys.path
     mask = check50.py.import_("mask.py")
     mask_token_index = 103
-    input_ids = [ 101,  103, 2003, 1037, 3231, 1012,  102]
-    inputs = BatchEncoding(
-        {"input_ids": [input_ids]},
-        encoding=[Encoding(input_ids)]
-    )
+    input_ids = torch.tensor([101, 103, 2003, 1037, 3231, 1012, 102])
+    inputs = BatchEncoding({"input_ids": [input_ids]}, encoding=[Encoding(input_ids)])
 
     # Test
     expected = 1
@@ -88,11 +84,8 @@ def get_mask_token_index_2():
     sys.path = [""] + sys.path
     mask = check50.py.import_("mask.py")
     mask_token_index = 103
-    input_ids = [ 101, 2023, 2003, 1037, 3231, 1012,  102]
-    inputs = BatchEncoding(
-        {"input_ids": [input_ids]},
-        encoding=[Encoding(input_ids)]
-    )
+    input_ids = torch.tensor([101, 2023, 2003, 1037, 3231, 1012, 102])
+    inputs = BatchEncoding({"input_ids": [input_ids]}, encoding=[Encoding(input_ids)])
 
     # Test
     expected = None
@@ -110,11 +103,8 @@ def get_mask_token_index_3():
     sys.path = [""] + sys.path
     mask = check50.py.import_("mask.py")
     mask_token_index = 108
-    input_ids = [ 101, 2023, 2003, 1037,  108, 3231, 1012,  102]
-    inputs = BatchEncoding(
-        {"input_ids": [input_ids]},
-        encoding=[Encoding(input_ids)]
-    )
+    input_ids = torch.tensor([101, 2023, 2003, 1037, 108, 3231, 1012, 102])
+    inputs = BatchEncoding({"input_ids": [input_ids]}, encoding=[Encoding(input_ids)])
 
     # Test
     expected = 4
